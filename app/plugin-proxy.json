@@ -1,0 +1,8 @@
+{
+  "@ministryofjustice/hmpps-connect-dps-components": {
+    "nunjucksPaths": ["/dist/assets"],
+    "meta": {
+      "description": "Official HMPPS DPS component templates."
+    }
+  }
+}

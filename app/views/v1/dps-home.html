@@ -1,0 +1,83 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = "Home" %}
+{% block pageTitle %}Home - Digital Prison Services{% endblock %}
+
+{% set services = [
+  { text: "Accredited Programmes", description: "Search for Accredited Programmes, make referrals and view their progress.", href: "#" },
+  { text: "Adjudications", description: "Place a prisoner on report after an incident, view reports and manage adjudications.", href: "#" },
+  { text: "Check my diary", description: "View your prison staff detail (staff rota) from home.", href: "#" },
+  { text: "CSIP", description: "View and manage the Challenge, Support and Intervention Plan (CSIP) caseload.", href: "#" },
+  { text: "External movements", description: "Add, edit and manage temporary absences and transfers.", href: "#" },
+  { text: "Global search", description: "Search for someone in any establishment, or who has been released.", href: "#" },
+  { text: "Learning and work progress", description: "View and manage learning and work history, support needs, goals and progress.", href: "#" },
+  { text: "Manage user accounts", description: "As a Local System Administrator (LSA) or administrator, manage accounts and groups for service users.", href: "#" },
+  { text: "Social visits", description: "Book and manage social visits.", href: "#" },
+  { text: "Submit an intelligence report", description: "Access to the intelligence submission form", href: "#" },
+  { text: "Support for additional needs", description: "View and manage support planning for education and life across prison.", href: "#" }
+] %}
+
+{% set updates = [
+  { date: "1 October 2026", datetime: "2026-10-01", title: "Prisons Digital Quarterly Newsletter - October Edition", summary: "We reflect on the past three months in Prisons Digital, featuring some of our recent successes, upcoming events and a look at what is coming next." },
+  { date: "1 October 2026", datetime: "2026-10-01", title: "Tell us what you think about DPS", summary: "Every six months, we ask you to tell us how satisfied you have been with Digital Prison Service (DPS)" },
+  { date: "1 July 2026", datetime: "2026-07-01", title: "Prisons Digital Quarterly Newsletter - July Edition", summary: "We reflect on the past three months in Prisons Digital, featuring some of our recent successes, upcoming events and a look at what is coming next." }
+] %}
+
+{% block header %}{% include "includes/dps/header.njk" %}{% endblock %}
+
+{% block container %}
+<main class="govuk-main-wrapper govuk-body dps-homepage-container" id="main-content">
+  <header class="dps-header">
+    <div class="govuk-width-container">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-2">Welcome to Digital Prison Services</h1>
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1">The modern replacement for NOMIS.</p>
+      <a class="govuk-link govuk-link--text-colour" href="#">Find out more about DPS</a>
+    </div>
+  </header>
+
+  <div class="govuk-width-container">
+    <section aria-labelledby="services-heading" class="govuk-!-margin-top-4">
+      <h2 class="govuk-heading-m" id="services-heading">Services</h2>
+      <div class="hmpps-services">
+        {% for service in services %}
+        <div class="hmpps-service-item">
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-static-margin-top-0">
+          <div class="hmpps-service-item__header">
+          <a class="govuk-link govuk-link--no-visited-state govuk-!-font-weight-bold" href="{{ service.href }}">{{ service.text }}</a>
+          </div>
+          <p class="govuk-body govuk-!-margin-top-3 govuk-!-margin-bottom-0">{{ service.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <hr class="today-section-break--blue">
+
+    <div class="dps-homepage-flex-container">
+      <section class="dps-homepage-whats-new" aria-labelledby="updates-heading">
+        <h2 class="govuk-heading-m" id="updates-heading">What’s new in DPS</h2>
+        {% for update in updates %}
+        <article class="whats-new-post">
+          <time class="whats-new-post__date" datetime="{{ update.datetime }}">{{ update.date }}</time>
+          <a class="govuk-link govuk-link--no-visited-state" href="#">{{ update.title }}</a>
+          <p class="govuk-body whats-new-post__summary">{{ update.summary }}</p>
+        </article>
+        {% endfor %}
+        <a class="govuk-link govuk-link--no-visited-state" href="#">All updates</a>
+      </section>
+      <section class="dps-homepage-help" aria-labelledby="help-heading">
+        <h2 class="govuk-heading-m" id="help-heading">Get help with DPS</h2>
+        <h3 class="govuk-heading-s">Contact the helpdesk</h3>
+        <p class="govuk-body">Call 0800 917 5148 or #6598 from inside an establishment.</p>
+        <h3 class="govuk-heading-s">Tell us what you think</h3>
+        <p class="govuk-body">You can help improve DPS by <a class="govuk-link govuk-link--no-visited-state" href="#" rel="noopener noreferrer">giving us your feedback (opens in a new tab)</a>.</p>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block footer %}{% include "includes/dps/footer.njk" %}{% endblock %}
+
+{% block pageScripts %}
+<script src="/public/javascripts/vendor/dps-header.js"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = "Select service" %}
+{% set signedIn = true %}
+
+{% set services = [
+  { name: "Digital Prison Service", description: "View and Manage Offenders in Prison", href: "/v1/dps-home" },
+  { name: "Incident reporting service", description: "View and manage incidents in prison", href: "#" },
+  { name: "Manage prison visits", description: "Book, view and cancel a prisoner’s social visits.", href: "#" },
+  { name: "Manage user accounts", href: "#" },
+  { name: "Manage your account details", href: "#" }
+] %}
+
+{% block content %}
+<h1 class="govuk-heading-l">Select service</h1>
+<div class="govuk-grid-row auth-card-group">
+  {% for service in services %}
+  <div class="govuk-grid-column-one-third auth-card-group__item">
+    <div class="auth-card auth-card--clickable">
+      <h2 class="govuk-heading-m auth-card__heading">
+        <a class="govuk-link auth-card__link" href="{{ service.href }}">{{ service.name }}</a>
+      </h2>
+      {% if service.description %}
+      <p class="govuk-body auth-card__description">{{ service.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+  {% if loop.index == 3 %}</div><div class="govuk-grid-row auth-card-group">{% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

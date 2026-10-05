@@ -1,0 +1,4 @@
+// Share the Prototype Kit asset path with the HMPPS package's Sass modules.
+@use "node_modules/govuk-frontend/dist/govuk/base" with (
+  $govuk-assets-path: "/plugin-assets/govuk-frontend/dist/govuk/assets/"
+);
