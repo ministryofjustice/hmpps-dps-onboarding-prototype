@@ -10,7 +10,9 @@ module.exports = router => {
   })
 
   router.post(v + 'terms-multiple-pages', (req, res) => {
-    if (req.body['terms-accepted'] !== 'accepted') {
+    const accepted = [req.body['terms-accepted']].flat().includes('accepted')
+
+    if (!accepted) {
       return res.render(vGet + 'terms-multiple-pages-4', { termsError: true })
     }
 
@@ -22,7 +24,9 @@ module.exports = router => {
   })
 
   router.post(v + 'terms', (req, res) => {
-    if (req.body['terms-accepted'] !== 'accepted') {
+    const accepted = [req.body['terms-accepted']].flat().includes('accepted')
+
+    if (!accepted) {
       return res.render(vGet + 'terms', { termsError: true })
     }
 
