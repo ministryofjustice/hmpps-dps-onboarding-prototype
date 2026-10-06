@@ -7,8 +7,10 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 
 // Keep header and footer links within the prototype's current page.
-const inertLinks = html => html.replace(/href="[^"]*"/g, 'href="#"')
-  .replace(/\s+target="[^"]*"/g, '')
+const inertLinks = html => html.replace(/<a\b[^>]*>/g, tag =>
+  tag.replace(/\shref="[^"]*"/g, ' href="#"')
+    .replace(/\s+target="[^"]*"/g, '')
+)
 
 addFilter('inertLinks', inertLinks, { renderAsHtml: true })
 
