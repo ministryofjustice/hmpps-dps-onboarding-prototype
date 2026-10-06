@@ -1,0 +1,36 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = ("Error: " if termsError) + "Accessing information responsibly" %}
+{% set signedIn = true %}
+{% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back", href: "/v1/sign-in-multiple-pages" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Terms and conditions: part 1 of 4</span>
+    <h1 class="govuk-heading-l">Accessing information responsibly</h1>
+    <p class="govuk-body">You must read and agree to these terms and conditions for the responsible use of HMPPS Digital Services. The terms and conditions govern your user account and staff access.</p>
+    <p class="govuk-body">HMPPS Digital Services contain sensitive information. By using HMPPS Digital Services, you confirm that you understand and agree to the following responsibilities.</p>
+
+    <h2 class="govuk-heading-m">Who we are</h2>
+    <p class="govuk-body">HMPPS Digital Services are managed by Justice Digital on behalf of the Crown. Justice Digital is part of the Ministry of Justice and will be referred to as ‘we’ from now on.</p>
+
+    <h2 class="govuk-heading-m">Only access information you need for your job</h2>
+    <p class="govuk-body">Only search, access, view, use or share prisoner information when you have a legitimate work-related reason to do so.</p>
+    <p class="govuk-body">Having access to a prisoner’s profile does not mean you are authorised to view it.</p>
+    <p class="govuk-body">Accessing information without a legitimate work-related reason is unauthorised access.</p>
+    <p class="govuk-body">Anything you do in HMPPS Digital Services must comply with the Computer Misuse Act and other relevant data legislation.</p>
+    <p class="govuk-body">You must not:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>browse or search records out of curiosity, including friends or family</li>
+      <li>look up prisoners unless you need to as part of your role</li>
+      <li>access records at another establishment or information for someone else, unless you're authorised to do so as part of your work</li>
+    </ul>
+
+    {{ govukButton({ text: "Continue", href: "/v1/terms-multiple-pages-2" }) }}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = ("Error: " if termsError) + "Keeping information and your account secure" %}
+{% set signedIn = true %}
+{% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back", href: "/v1/terms-multiple-pages" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Terms and conditions: part 2 of 4</span>
+    <h1 class="govuk-heading-l">Keeping information and your account secure</h1>
+    <h2 class="govuk-heading-m">Keep information secure and confidential</h2>
+    <p class="govuk-body">Information in HMPPS Digital Services is sensitive and must be handled responsibly.</p>
+    <p class="govuk-body">You must:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>keep prisoner and staff information confidential</li>
+      <li>only share information with people inside or outside HMPPS who are authorised to receive it</li>
+      <li>only print, copy, photograph, download or otherwise share information when you have a legitimate work-related reason and are authorised to do so</li>
+      <li>follow HMPPS policies when storing, sending or handling information</li>
+    </ul>
+    <p class="govuk-body">You must not:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>allow unauthorised people to view or use HMPPS Digital Services or your staff computer</li>
+      <li>allow prisoners to view screens, even those that contain their own information</li>
+      <li>take screen shots or use web capture tools to take images from HMPPS Digital Services</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">Protect your account</h2>
+    <p class="govuk-body">Your account is for your use only. You are accountable for what you do on your account and for what someone else does if you let them use it. Everything you do in HMPPS Digital Services is linked to you.</p>
+    <p class="govuk-body">Always keep your account details secure. You must never:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>share your username or password</li>
+      <li>use someone else's account</li>
+      <li>allow someone else to use your account</li>
+      <li>leave your computer unlocked if unattended</li>
+      <li>attempt to access HMPPS Digital Services from a non-MOJ approved device</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">How to report security a breach</h2>
+    <p class="govuk-body">You must read and understand how to report security breaches.</p>
+
+    {{ govukButton({ text: "Continue", href: "/v1/terms-multiple-pages-3" }) }}
+  </div>
+</div>
+{% endblock %}

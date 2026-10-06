@@ -1,5 +1,5 @@
 {
-  "serviceName": "HMPPS DPS Onboarding",
+  "serviceName": "DPS Onboarding",
   "useServiceNavigation": true,
   "plugins": {
     "govuk-frontend": {

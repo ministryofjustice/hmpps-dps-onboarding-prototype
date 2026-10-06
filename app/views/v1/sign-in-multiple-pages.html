@@ -1,0 +1,52 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = "Sign in" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ mojAlert({
+      variant: "information",
+      title: "Verify your email alert",
+      html: '<p class="govuk-body">You may need to verify your justice.gov.uk email address when you sign in. Find out what is changing and <a class="govuk-link" href="#">how to verify your email address</a>.</p>'
+    }) }}
+
+    {{ govukWarningText({
+      html: 'This is a test service only - it does not contain any real details.<br>Use the live <a class="govuk-link" href="#">HMPPS Digital Service</a> to access the live data.',
+      iconFallbackText: "Warning"
+    }) }}
+
+    <h1 class="govuk-heading-l">Sign in</h1>
+    <form action="/v1/sign-in-multiple-pages" method="post" novalidate>
+      {{ govukInput({
+        id: "username",
+        name: "username",
+        label: { text: "Username" },
+        classes: "govuk-!-width-two-thirds",
+        autocomplete: "username",
+        spellcheck: false,
+        attributes: { autocapitalize: "none" }
+      }) }}
+
+      {{ govukPasswordInput({
+        id: "password",
+        name: "_password",
+        label: { text: "Password" },
+        formGroup: { classes: "govuk-!-width-two-thirds" }
+      }) }}
+
+      {{ govukButton({ text: "Sign in", attributes: { "data-element-id": "continue-button" } }) }}
+      <p class="govuk-body govuk-!-margin-bottom-8">
+        <a class="govuk-link" href="#">Sign in with a justice.gov.uk email</a>
+      </p>
+    </form>
+
+    <h2 class="govuk-heading-m">Problems signing in</h2>
+    <p class="govuk-body"><a class="govuk-link" href="#">I have forgotten my password</a></p>
+    <p class="govuk-body"><a class="govuk-link" href="#">I have forgotten my username</a></p>
+    {{ govukDetails({
+      summaryText: "Why won’t my password work?",
+      html: '<p class="govuk-body">Your password is case-sensitive which means you must enter your password exactly as you first created it. For example if your password is <strong>H3LloWorlD</strong> you must enter it exactly like that.</p>'
+    }) }}
+  </div>
+</div>
+{% endblock %}

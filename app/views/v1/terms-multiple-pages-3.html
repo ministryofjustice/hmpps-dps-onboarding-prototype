@@ -1,0 +1,41 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = ("Error: " if termsError) + "Using HMPPS Digital Services professionally" %}
+{% set signedIn = true %}
+{% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back", href: "/v1/terms-multiple-pages-2" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Terms and conditions: part 3 of 4</span>
+    <h1 class="govuk-heading-l">Using HMPPS Digital Services professionally</h1>
+    <h2 class="govuk-heading-m">Keep records accurate and use HMPPS Digital Services professionally</h2>
+    <p class="govuk-body">What you record is used across HMPPS to make operational decisions. Inaccurate entries can lead to poor decisions.</p>
+    <p class="govuk-body">You must:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>record information accurately</li>
+      <li>update records promptly</li>
+      <li>correct mistakes where appropriate</li>
+      <li>only use HMPPS Digital Services for official HMPPS business</li>
+    </ul>
+    <p class="govuk-body">All data you enter into HMPPS Digital Services is potentially liable to legal disclosure under the Data Protection Act and/or the Freedom of Information Act.</p>
+
+    <h2 class="govuk-heading-m">Remember your activity is recorded and may be monitored</h2>
+    <p class="govuk-body">HMPPS Digital Services keeps an audit trail of your activity. Your activity may be monitored and investigated where inappropriate or unauthorised use is suspected.</p>
+    <p class="govuk-body">HMPPS can see:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>what information you've searched for or viewed</li>
+      <li>what you've created or changed</li>
+      <li>when you accessed it</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">If you misuse HMPPS Digital Services</h2>
+    <p class="govuk-body">Unauthorised or inappropriate access, use or sharing of information in HMPPS Digital Services is treated as gross misconduct. It could result in disciplinary action, criminal investigation and prosecution.</p>
+
+    {{ govukButton({ text: "Continue", href: "/v1/terms-multiple-pages-4" }) }}
+  </div>
+</div>
+{% endblock %}
