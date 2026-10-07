@@ -1,0 +1,41 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = ("Error: " if termsError) + "Your information and accepting the terms" %}
+{% set signedIn = true %}
+{% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back", href: "/v1/terms-multiple-pages-4" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {% if termsError %}
+      {{ govukErrorSummary({ titleText: "There is a problem", errorList: [{ text: termsErrorMessage, href: "#terms-accepted" }] }) }}
+    {% endif %}
+
+    <span class="govuk-caption-l">Terms and conditions: part 5 of 5</span>
+    <h1 class="govuk-heading-l">Your information and accepting the terms</h1>
+    <h2 class="govuk-heading-m">Information about you and your visits to HMPPS Digital Services</h2>
+    <p class="govuk-body">We collect information about you in accordance with our privacy policy and our cookie policy. By using HMPPS Digital Services, you agree to us collecting this information and confirm that any data you provide is accurate.</p>
+    <p class="govuk-body">The legal basis for processing your personal data is that it’s collected to fulfil your obligations under your employment contract and it is necessary to perform a task in line with HMPPS policies and procedures.</p>
+
+    <h2 class="govuk-heading-m">Changes to these terms and conditions and your acceptance</h2>
+    <p class="govuk-body">Please check these terms and conditions regularly. We can update them at any time without notice.</p>
+    <p class="govuk-body">You’ll agree to any changes if you continue to use HMPPS Digital Services after the terms and conditions have been updated.</p>
+
+    <form action="/v1/terms-multiple-pages" method="post" novalidate>
+      {{ govukCheckboxes({
+        name: "terms-accepted",
+        idPrefix: "terms-accepted",
+        errorMessage: { text: termsErrorMessage } if termsError,
+        items: [{
+          value: "accepted",
+          text: "I agree to these terms and conditions for the responsible use of HMPPS Digital Services."
+        }]
+      }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+  </div>
+</div>
+{% endblock %}

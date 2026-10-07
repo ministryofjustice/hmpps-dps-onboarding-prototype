@@ -13,7 +13,7 @@ module.exports = router => {
     const accepted = [req.body['terms-accepted']].flat().includes('accepted')
 
     if (!accepted) {
-      return res.render(vGet + 'terms-multiple-pages-4', { termsError: true })
+      return res.render(vGet + 'terms-multiple-pages-5', { termsError: true })
     }
 
     res.redirect(v + 'select-service')
