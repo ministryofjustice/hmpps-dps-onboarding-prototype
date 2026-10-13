@@ -1,0 +1,30 @@
+{% extends "layouts/hmpps.html" %}
+{% set pageName = "Before you start using HMPPS Digital Services" %}
+{% set signedIn = true %}
+
+{% block beforeContent %}
+  {{ govukBackLink({ text: "Back", href: "/v2/sign-in-multiple-pages" }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Terms and conditions: part 1 of 5</span>
+    <h1 class="govuk-heading-l">Before you start using HMPPS Digital Services</h1>
+    <p class="govuk-body">You must read and agree to these terms and conditions for the responsible use of HMPPS Digital Services. The terms and conditions govern your user account and staff access.</p>
+    <p class="govuk-body">HMPPS Digital Services contain sensitive information. By using HMPPS Digital Services, you confirm that you understand and agree to the following responsibilities.</p>
+
+    <h2 class="govuk-heading-m">What are HMPPS Digital Services</h2>
+    <p class="govuk-body">HMPPS Digital Services are:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Digital Prison Services (DPS)</li>
+      <li>Probation Digital Services (PDS)</li>
+    </ul>
+
+    <h2 class="govuk-heading-m">Who we are</h2>
+    <p class="govuk-body">HMPPS Digital Services are managed by Justice Digital on behalf of the Crown. Justice Digital is part of the Ministry of Justice and will be referred to as ‘we’ from now on.</p>
+
+    {{ govukButton({ text: "Continue", href: "/v2/terms-multiple-pages-2" }) }}
+  </div>
+</div>
+{% endblock %}
