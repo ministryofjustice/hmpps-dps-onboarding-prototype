@@ -10,3 +10,16 @@
   </div>
 </div>
 {% endblock %}
+
+{% block pageScripts %}
+<script>
+document.querySelectorAll('body *').forEach(el => {
+  if (el.children.length === 0) {
+    el.textContent = el.textContent.replace(
+      'After logging in, you can find them in the footer of DPS and PDS.',
+      ''
+    );
+  }
+});
+</script>
+{% endblock %}
