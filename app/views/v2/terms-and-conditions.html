@@ -22,4 +22,14 @@ document.querySelectorAll('body *').forEach(el => {
   }
 });
 </script>
+<script>
+document.querySelectorAll('body *').forEach(el => {
+  if (el.children.length === 0) {
+    el.textContent = el.textContent.replace(
+      ' and your acceptance',
+      ''
+    );
+  }
+});
+</script>
 {% endblock %}
