@@ -5,30 +5,6 @@
 {% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
 
 {% block content %}
-<div class="govuk-grid-row terms-layout">
-  <div class="govuk-grid-column-one-third terms-layout__sidebar">
-    <nav class="terms-static-contents" aria-labelledby="terms-contents-title">
-      <a class="govuk-skip-link" href="#terms-introduction">Skip to terms content</a>
-      <h2 class="govuk-heading-m terms-static-contents__title" id="terms-contents-title">Contents</h2>
-      <ul class="govuk-list terms-static-contents__list">
-        <li><a class="govuk-link terms-static-contents__link" href="#terms-introduction">Introduction</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#what-are-hmpps-digital-services">What are HMPPS Digital Services</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#who-we-are">Who we are</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#accessing-information">Only access information you need for your job</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#keeping-information-secure">Keep information secure and confidential</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#protecting-your-account">Protect your account</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#reporting-security-breaches">How to report a security breach</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#keeping-records-accurate">Keep records accurate and use HMPPS Digital Services professionally</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#monitoring-your-activity">Remember your activity is recorded and may be monitored</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#misuse">If you misuse HMPPS Digital Services</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#your-personal-details">Your personal details</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#changes-and-acceptance">Changes to these terms and conditions and your acceptance</a></li>
-        <li><a class="govuk-link terms-static-contents__link" href="#terms-agreement">Agree to the terms and conditions</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="govuk-grid-column-two-thirds terms-content">
     {% if termsError %}
       {{ govukErrorSummary({
         titleText: "There is a problem",
@@ -36,7 +12,35 @@
       }) }}
     {% endif %}
 
-    <h1 class="govuk-heading-l" id="terms-introduction" tabindex="-1">Before you start using HMPPS Digital Services</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-8">Before you start using HMPPS Digital Services</h1>
+
+<div class="govuk-grid-row terms-layout">
+  <div class="govuk-grid-column-one-third terms-layout__sidebar">
+    <nav class="terms-static-contents" aria-labelledby="terms-contents-title">
+      <a class="govuk-skip-link govuk-link--no-visited-state" href="#terms-introduction">Skip to terms content</a>
+      <h2 class="govuk-heading-m terms-static-contents__title" id="terms-contents-title">Contents</h2>
+      <ul class="govuk-list terms-static-contents__list">
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#terms-introduction">Introduction</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#what-are-hmpps-digital-services">What are HMPPS Digital Services</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#who-we-are">Who we are</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#accessing-information">Only access information you need for your job</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#keeping-information-secure">Keep information secure and confidential</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#protecting-your-account">Protect your account</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#reporting-security-breaches">How to report a security breach</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#keeping-records-accurate">Keep records accurate and use HMPPS Digital Services professionally</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#monitoring-your-activity">Remember your activity is recorded and may be monitored</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#misuse">If you misuse HMPPS Digital Services</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#your-personal-details">Your personal details</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#changes-and-acceptance">Changes to these terms and conditions and your acceptance</a></li>
+        <li><a class="govuk-link terms-static-contents__link govuk-link--no-visited-state" href="#terms-agreement">Agree to the terms and conditions</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="govuk-grid-column-two-thirds terms-content">
+    <div id="terms-introduction" tabindex="-1">
+      <span class="govuk-visually-hidden">Introduction</span>
+    </div>
 {% include "includes/v2/terms/all-sections.njk" %}
 {% include "includes/v2/terms/acceptance.njk" %}
   </div>
