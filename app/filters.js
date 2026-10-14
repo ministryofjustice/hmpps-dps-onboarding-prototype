@@ -14,6 +14,11 @@ const inertLinks = html => html.replace(/<a\b[^>]*>/g, tag =>
 
 addFilter('inertLinks', inertLinks, { renderAsHtml: true })
 
+addFilter('footerTermsLink', (html, url) => html.replace(
+  /(<a\b[^>]*)(>\s*Terms and conditions\s*<\/a>)/g,
+  (match, tag, content) => tag.replace(/\shref="[^"]*"/g, ' href="' + url + '"') + content
+), { renderAsHtml: true })
+
 // Header identity links return to the prototype home.
 const prototypeHeaderLinks = html => inertLinks(html).replace(/<a\b[^>]*>/g, tag => {
   const classes = (tag.match(/\bclass="([^"]*)"/) || [])[1] || ''

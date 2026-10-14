@@ -1,9 +1,9 @@
-{% extends "layouts/hmpps.html" %}
+{% extends "layouts/hmpps-terms.html" %}
 {% set pageName = "Select service" %}
 {% set signedIn = true %}
 
 {% set services = [
-  { name: "Digital Prison Service", description: "View and Manage Offenders in Prison", href: "/v2/dps-home" },
+  { name: "Digital Prison Service", description: "View and Manage Offenders in Prison", href: routes.dpsHome },
   { name: "Incident reporting service", description: "View and manage incidents in prison", href: "#" },
   { name: "Manage prison visits", description: "Book, view and cancel a prisoner’s social visits.", href: "#" },
   { name: "Manage user accounts", href: "#" },

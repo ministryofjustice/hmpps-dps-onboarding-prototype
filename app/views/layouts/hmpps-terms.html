@@ -1,0 +1,7 @@
+{% extends "layouts/hmpps.html" %}
+
+{% block footer %}
+  {{ govukFooter({
+    meta: { items: [{ text: "Terms and conditions", href: termsUrl }] }
+  }) | inertLinks | footerTermsLink(termsUrl) }}
+{% endblock %}

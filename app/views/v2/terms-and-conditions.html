@@ -1,0 +1,12 @@
+{% extends "layouts/hmpps-terms.html" %}
+{% set pageName = "Terms and conditions" %}
+{% set signedIn = true %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Terms and conditions</h1>
+{% include "includes/v2/terms/all-sections.njk" %}
+  </div>
+</div>
+{% endblock %}
