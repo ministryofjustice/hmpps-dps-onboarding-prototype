@@ -1,0 +1,21 @@
+{% extends "layouts/hmpps-terms.html" %}
+{% set pageName = ("Error: " if termsError) + "Before you start using HMPPS Digital Services" %}
+{% set signedIn = true %}
+{% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {% if termsError %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{ text: termsErrorMessage, href: "#terms-accepted" }]
+      }) }}
+    {% endif %}
+
+    <h1 class="govuk-heading-l">Before you start using HMPPS Digital Services</h1>
+{% include "includes/v3/terms/all-sections.njk" %}
+{% include "includes/v3/terms/acceptance.njk" %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+    <form{% if termsWithAnchors %} id="terms-agreement" tabindex="-1"{% endif %} method="post" novalidate>
+      {{ govukCheckboxes({
+        name: "terms-accepted",
+        idPrefix: "terms-accepted",
+        errorMessage: { text: termsErrorMessage } if termsError,
+        items: [{
+          value: "accepted",
+          text: "I have read and agree to these terms and conditions for the responsible use of HMPPS Digital Services."
+        }]
+      }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>

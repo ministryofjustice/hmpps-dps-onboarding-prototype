@@ -1,0 +1,35 @@
+{% extends "layouts/hmpps-terms.html" %}
+{% set pageName = "Terms and conditions" %}
+{% set signedIn = true %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Terms and conditions</h1>
+{% include "includes/v3/terms/all-sections.njk" %}
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+document.querySelectorAll('body *').forEach(el => {
+  if (el.children.length === 0) {
+    el.textContent = el.textContent.replace(
+      'After logging in, you can find them in the footer of DPS and PDS.',
+      ''
+    );
+  }
+});
+</script>
+<script>
+document.querySelectorAll('body *').forEach(el => {
+  if (el.children.length === 0) {
+    el.textContent = el.textContent.replace(
+      ' and your acceptance',
+      ''
+    );
+  }
+});
+</script>
+{% endblock %}
