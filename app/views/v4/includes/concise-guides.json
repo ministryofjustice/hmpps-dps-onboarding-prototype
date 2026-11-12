@@ -12,7 +12,7 @@
         "image": {
           "file": "structure.png",
           "height": 392,
-          "alt": "Set wing structure page with level types selected and the resulting structure preview.",
+          "alt": "The structure preview shows Wing at level 1, with Spurs, Landings and Cells nested below it at levels 2, 3 and 4.",
           "caption": "This example has spurs, landings and cells. Other wings may be structured differently."
         }
       },
@@ -58,7 +58,7 @@
         "image": {
           "file": "cell-capacity.png",
           "height": 314,
-          "alt": "Cell capacities page showing Apply to all controls and an example cell’s capacities."
+          "alt": "Cell A-1-111 has a baseline CNA, working capacity and maximum capacity of 1. Each capacity field above the table has an Apply to all link."
         }
       },
       {

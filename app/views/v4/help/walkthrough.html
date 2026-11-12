@@ -24,7 +24,7 @@
         <h4 class="govuk-heading-s">{{ item.title }}</h4>
         <p class="govuk-body">{{ item.body }}</p>
       </div>
-      <img src="{{ guidanceImages }}/{{ item.image }}" width="{{ item.width }}" height="{{ item.height }}" alt="" loading="lazy">
+      <img src="{{ guidanceImages }}/{{ item.image }}" width="{{ item.width }}" height="{{ item.height }}" alt="{{ item.alt }}" loading="lazy">
     </section>
   {% endfor %}
 
