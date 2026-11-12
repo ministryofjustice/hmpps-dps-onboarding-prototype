@@ -1,0 +1,48 @@
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% macro staticLink(text, classes = "") -%}
+  <a class="govuk-link govuk-link--no-visited-state {{ classes }}" aria-disabled="true">{{ text }}</a>
+{%- endmacro %}
+
+{% macro linkButton(text, name, value) %}
+  <button class="govuk-link govuk-link--no-visited-state dps-link-button" type="submit" name="{{ name }}" value="{{ value }}">{{ text }}</button>
+{% endmacro %}
+
+{% macro cards(items) %}
+  <ul class="govuk-list dps-cards">
+    {% for item in items %}
+      <li class="dps-card">
+        <h3 class="govuk-heading-m">
+          {% if item.href %}
+            <a class="govuk-link govuk-link--no-visited-state dps-card__link" href="{{ item.href }}">{{ item.title }}</a>
+          {% else %}
+            {{ staticLink(item.title) }}
+          {% endif %}
+        </h3>
+        <p class="govuk-body govuk-!-margin-bottom-0">{{ item.description }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro feedback() %}
+  <div class="dps-feedback">
+    {{ staticLink("Suggest an improvement or report a problem with this service", "govuk-link--inverse govuk-!-font-size-16") }}
+  </div>
+{% endmacro %}
+
+{% macro summaryList(items) %}
+  {% set rows = [] %}
+  {% for item in items %}
+    {% set added = rows.push({ key: {text: item[0]}, value: {text: item[1]} }) %}
+  {% endfor %}
+  {{ govukSummaryList({rows: rows}) }}
+{% endmacro %}
+
+{% macro productHelpLink(text, href, prominent = false) %}
+  <a class="govuk-link govuk-link--no-visited-state{% if prominent %} dps-product-help{% endif %}" href="{{ href }}" target="_blank" rel="noopener">
+    {% if prominent %}<span class="dps-product-help__icon" aria-hidden="true">?</span>{% endif %}
+    <span{% if prominent %} class="dps-product-help__label"{% endif %}>{{ text }}<span class="govuk-visually-hidden"> (opens in a new tab)</span></span>
+  </a>
+{% endmacro %}
+

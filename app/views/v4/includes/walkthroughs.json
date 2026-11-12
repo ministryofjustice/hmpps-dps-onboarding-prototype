@@ -1,0 +1,233 @@
+{
+  "wing": {
+    "title": "Set up a new wing and its cells",
+    "sections": [
+      {
+        "title": "Create the wing and choose its structure",
+        "intro": "Have the wing code, its structure and the information about its cells ready before you start.",
+        "rows": [
+          {
+            "title": "Enter the wing details",
+            "body": "Enter a wing code and, if needed, a local name. The local name changes how the wing is displayed, without changing its code.",
+            "image": "wing-details.png",
+            "width": 400,
+            "height": 240
+          },
+          {
+            "title": "Choose the wing structure",
+            "body": "Set the levels to match the actual wing. This example uses spurs, landings and cells. Other wings may have a different structure.",
+            "image": "structure.png",
+            "width": 400,
+            "height": 392
+          },
+          {
+            "title": "Check and create the wing",
+            "body": "Check its code, name and structure, then select Create wing. The new wing is a draft. Add its locations before requesting a change to the cell certificate.",
+            "image": "wing-check.png",
+            "width": 400,
+            "height": 262
+          }
+        ]
+      },
+      {
+        "title": "Add spurs and landings",
+        "intro": "Follow the levels chosen for this wing. This example uses a spur and a landing.",
+        "rows": [
+          {
+            "title": "Add a spur",
+            "body": "From the draft wing, select Create new spur. Enter its code and optional local name.",
+            "image": "spur.png",
+            "width": 400,
+            "height": 234
+          },
+          {
+            "title": "Check and create the spur",
+            "body": "Check the spur details, then select Create spur. You can now add landings within it.",
+            "image": "spur-check.png",
+            "width": 400,
+            "height": 228
+          },
+          {
+            "title": "Add a landing",
+            "body": "Select Create new landing. Enter its code and optional local name. Choose Yes to create its cells now, or create them later.",
+            "image": "landing.png",
+            "width": 400,
+            "height": 310
+          }
+        ]
+      },
+      {
+        "title": "Create and number cells",
+        "intro": "Create the cells on the new landing and check their numbering.",
+        "rows": [
+          {
+            "title": "Enter the cell details",
+            "body": "Enter how many cells to create and select the accommodation type. This example creates eight cells on the new landing.",
+            "image": "wing-cells.png",
+            "width": 400,
+            "height": 234
+          },
+          {
+            "title": "Set the cell numbers",
+            "body": "Enter the starting number and select Apply to number the cells. Check each number before continuing.",
+            "image": "wing-numbers.png",
+            "width": 400,
+            "height": 392
+          },
+          {
+            "title": "Enter the door numbers",
+            "body": "Enter the number written on each cell door. It may be different from the cell number used in Locations.",
+            "image": "wing-doors.png",
+            "width": 400,
+            "height": 392
+          }
+        ]
+      },
+      {
+        "title": "Set capacities and other cell details",
+        "intro": "Check the capacities and other information for the cells you are creating.",
+        "rows": [
+          {
+            "title": "Set capacities and cell types",
+            "body": "Enter baseline CNA, working capacity and maximum capacity. Apply a value to all cells when appropriate, then check each row. Add a cell type where needed.",
+            "image": "wing-capacity.png",
+            "width": 400,
+            "height": 491
+          },
+          {
+            "title": "Record what the cells are used for",
+            "body": "Select the uses that apply to all the cells in this example. Check that the choices describe the accommodation you are creating.",
+            "image": "wing-use.png",
+            "width": 400,
+            "height": 483
+          },
+          {
+            "title": "Record in-cell sanitation",
+            "body": "Confirm whether all the cells have both a toilet and a wash basin.",
+            "image": "wing-sanitation.png",
+            "width": 400,
+            "height": 228
+          }
+        ]
+      },
+      {
+        "title": "Check locations and request approval",
+        "intro": "Creating draft locations and requesting approval are separate parts of the process.",
+        "rows": [
+          {
+            "title": "Check and create the locations",
+            "body": "Check the landing, cell numbers, capacities and other details. Use Change to correct anything, then select Create locations.",
+            "image": "wing-locations-check.png",
+            "width": 400,
+            "height": 569
+          },
+          {
+            "title": "Check the draft locations",
+            "body": "The landing and cells have been created in draft. Repeat the relevant steps for any other spurs, landings and cells you need.",
+            "image": "wing-draft.png",
+            "width": 400,
+            "height": 530
+          },
+          {
+            "title": "Add the wing to the cell certificate",
+            "body": "When the locations are ready, select Add wing to cell certificate. Adding new locations requires a change request.",
+            "image": "certificate.png",
+            "width": 400,
+            "height": 154
+          },
+          {
+            "title": "Check and submit the request",
+            "body": "Review the proposed locations and capacities and the certification statement. When ready, select Submit for approval. The request goes to the establishment’s authorising director. Locations cannot be changed while it is reviewed.",
+            "image": "approval.png",
+            "width": 400,
+            "height": 535
+          }
+        ]
+      }
+    ]
+  },
+  "add-cells": {
+    "title": "Add cells to an existing location",
+    "sections": [
+      {
+        "title": "Find the location and create cells",
+        "intro": "Use this guide when the wing and landing already exist. Have the cell numbers, capacities and other cell information ready.",
+        "rows": [
+          {
+            "title": "Find the existing location",
+            "body": "Open Manage residential locations. Select the wing and then the landing where the new cells belong. Select Create new cells. This example uses landing A-1 in Wing A.",
+            "image": "existing-landing.png",
+            "width": 400,
+            "height": 263
+          },
+          {
+            "title": "Enter the cell details",
+            "body": "Enter how many cells to create and choose the accommodation type. You do not need to create a new wing or landing.",
+            "image": "cell-details.png",
+            "width": 400,
+            "height": 238
+          },
+          {
+            "title": "Set the cell numbers",
+            "body": "Enter the starting number and select Apply. Check that the new numbers are right for this location.",
+            "image": "cell-numbers.png",
+            "width": 400,
+            "height": 260
+          },
+          {
+            "title": "Enter the door numbers",
+            "body": "Enter the actual number written on each cell door. It can differ from its cell number in Locations.",
+            "image": "cell-doors.png",
+            "width": 400,
+            "height": 228
+          }
+        ]
+      },
+      {
+        "title": "Set capacities and other cell details",
+        "rows": [
+          {
+            "title": "Set capacities and cell types",
+            "body": "Enter baseline CNA, working capacity and maximum capacity. Apply values to all cells where appropriate, then check each cell. Add a cell type if needed.",
+            "image": "cell-capacity.png",
+            "width": 400,
+            "height": 314
+          },
+          {
+            "title": "Record what the cells are used for",
+            "body": "Select the uses that apply to the cells you are creating.",
+            "image": "cell-use.png",
+            "width": 400,
+            "height": 487
+          },
+          {
+            "title": "Record in-cell sanitation",
+            "body": "Confirm whether all the new cells include both a toilet and wash basin.",
+            "image": "cell-sanitation.png",
+            "width": 400,
+            "height": 228
+          }
+        ]
+      },
+      {
+        "title": "Check the cells and what happens next",
+        "rows": [
+          {
+            "title": "Check and create the cells",
+            "body": "Check the cell details, numbering, capacities and other information. Select Change to correct anything, then Create cells.",
+            "image": "cell-check.png",
+            "width": 400,
+            "height": 357
+          },
+          {
+            "title": "Check what happens next",
+            "body": "The new cells appear on the existing landing as Draft. Creating a cell does not mean it is active and ready to use. Check the cell certificate and approval requirements before using it.",
+            "image": "cell-draft.png",
+            "width": 387,
+            "height": 800
+          }
+        ]
+      }
+    ]
+  }
+}

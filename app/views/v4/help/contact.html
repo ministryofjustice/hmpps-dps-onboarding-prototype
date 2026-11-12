@@ -1,0 +1,7 @@
+{% extends "./layout.html" %}
+{% from "../components/macros.njk" import staticLink %}
+
+{% block guideContent %}
+  <h2 class="govuk-heading-l">{{ guidePageTitle }}</h2>
+  <p class="govuk-body">If you have any questions, comments or feedback about Residential locations, email {{ staticLink("moveaprisoner@justice.gov.uk") }} or complete the {{ staticLink("feedback form") }}.</p>
+{% endblock %}

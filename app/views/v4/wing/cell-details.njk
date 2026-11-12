@@ -1,0 +1,15 @@
+{% if levels.length == 3 %}
+  <p class="govuk-body">The spur and landing are already set up for this example.</p>
+{% elif levels.length == 2 %}
+  <p class="govuk-body">The {{ "landing" if levels[0] == "Landings" else "spur" }} is already set up for this example.</p>
+{% endif %}
+{{ govukInput({
+  label: {text: "How many cells do you want to create?", classes: "govuk-!-font-weight-bold"},
+  id: "count", name: "_count", classes: "govuk-input--width-5", inputmode: "numeric",
+  value: count
+}) }}
+{{ govukRadios({
+  name: "_accommodation", idPrefix: "accommodation",
+  fieldset: { legend: { text: "Accommodation type", classes: "govuk-fieldset__legend--s" } },
+  items: accommodations
+}) }}

@@ -1,0 +1,104 @@
+{% extends "./layout.html" %}
+{% from "./components/macros.njk" import staticLink %}
+{% set pageName = "Home" %}
+{% set dpsFooterService = "Locations" %}
+
+{% set services = [
+  { text: "Activities, unlock and attendance", description: "Create and edit activities. Allocate people and edit allocations. Log applications and manage waitlists. Print unlock lists and record activity attendance." },
+  { text: "Adjudications", description: "Place a prisoner on report after an incident, view reports and manage adjudications." },
+  { text: "Check my diary", description: "View your prison staff detail (staff rota) from home." },
+  { text: "Contacts", description: "Search for prisoner contacts." },
+  { text: "Locations", description: "View or manage residential and non-residential locations.", href: urls.locations }
+] %}
+{% set updates = [
+  { date: "22 October 2026", datetime: "2026-10-22", title: "Scheduling Transfers will be available in DPS from Tuesday 17 November", summary: "From Tuesday 17 November you will be able to schedule transfers in Digital Prison Services (DPS)." },
+  { date: "20 October 2026", datetime: "2026-10-20", title: "You can now view X-ray body scan details in DPS", summary: "From 20 October 2026, you can view a prisoner’s X-ray body scan details from the Prisoner Profile Overview in DPS." },
+  { date: "1 October 2026", datetime: "2026-10-01", title: "Prisons Digital Quarterly Newsletter - October Edition", summary: "We reflect on the past three months in Prisons Digital, featuring some of our recent successes, upcoming events and a look at what is coming next." }
+] %}
+
+{% block container %}
+<main class="govuk-main-wrapper dps-homepage-container" id="main-content">
+  <header class="dps-header">
+    <div class="govuk-width-container dps-home-welcome">
+      <div class="dps-home-badge" aria-hidden="true">
+        <img src="/public/images/dps-crown.svg" alt="">
+        <span>DPS</span>
+      </div>
+      <div>
+        <h1 class="govuk-heading-l">Welcome to Digital Prison Services</h1>
+        <p class="govuk-body">The modern replacement for NOMIS.</p>
+        {{ staticLink("Find out more about DPS", "govuk-link--text-colour") }}
+      </div>
+    </div>
+  </header>
+
+  <section class="dps-home-search" aria-labelledby="search-heading">
+    <div class="govuk-width-container">
+      <h2 class="govuk-heading-m" id="search-heading">Search for a prisoner</h2>
+      {{ govukRadios({
+        classes: "govuk-radios--inline govuk-radios--small",
+        name: "prisoner-search-scope",
+        formGroup: { classes: "govuk-!-margin-bottom-0" },
+        fieldset: { legend: {text: "Where to search", classes: "govuk-visually-hidden"} },
+        items: [{text: "In Lincoln (HMP)", value: "lincoln", checked: true, disabled: true}, {text: "In any establishment (global)", value: "global", disabled: true}]
+      }) }}
+      <div class="dps-home-search__fields">
+        {{ govukInput({ label: {text: "Name or prison number"}, id: "prisoner-search", name: "prisoner-search", attributes: {disabled: true} }) }}
+        {{ govukSelect({ label: {text: "Residential location"}, id: "search-location", name: "search-location", items: [{text: "All", value: "all"}], attributes: {disabled: true} }) }}
+        <button class="govuk-button dps-search-button" type="button" disabled>Search</button>
+      </div>
+      <p class="govuk-body govuk-!-margin-bottom-0">{{ staticLink("All prisoners in Lincoln (HMP)") }}</p>
+    </div>
+  </section>
+
+  <div class="govuk-width-container">
+    <section class="dps-home-services" aria-labelledby="services-heading">
+      <h2 class="govuk-heading-m" id="services-heading">Services</h2>
+      <div class="hmpps-services">
+        {% for service in services %}
+          <article class="hmpps-service-item">
+            <h3 class="govuk-heading-s hmpps-service-item__header">
+              {% if service.href %}<a class="govuk-link govuk-link--no-visited-state" href="{{ service.href }}">{{ service.text }}</a>
+              {% else %}{{ staticLink(service.text) }}{% endif %}
+            </h3>
+            <p class="govuk-body govuk-!-margin-bottom-0">{{ service.description }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="dps-home-roll" aria-labelledby="today-heading">
+      <h2 class="govuk-heading-m" id="today-heading">Today in Lincoln (HMP)</h2>
+      <dl class="dps-stat-grid dps-stat-grid--home">
+        {% for item in [["Today’s unlock roll", "725"], ["Current population", "725", "Establishment roll"], ["In today", "0", "People in today"], ["Out today", "0", "People out today"]] %}
+          <div class="dps-stat dps-stat--home">
+            <dt class="govuk-body govuk-!-font-weight-bold">{{ item[0] }}</dt>
+            <dd class="govuk-heading-xl">{{ item[1] }}</dd>
+            {% if item[2] %}<dd class="govuk-body dps-stat__link">{{ staticLink(item[2]) }}</dd>{% endif %}
+          </div>
+        {% endfor %}
+      </dl>
+    </section>
+    <div class="dps-home-updates">
+      <section aria-labelledby="updates-heading">
+        <h2 class="govuk-heading-m" id="updates-heading">What’s new in DPS</h2>
+        {% for update in updates %}
+          <article class="whats-new-post">
+            <time class="whats-new-post__date" datetime="{{ update.datetime }}">{{ update.date }}</time>
+            <p class="govuk-body govuk-!-margin-bottom-2">{{ staticLink(update.title) }}</p>
+            <p class="govuk-body">{{ update.summary }}</p>
+          </article>
+        {% endfor %}
+        <p class="govuk-body">{{ staticLink("All updates") }}</p>
+      </section>
+      <section aria-labelledby="help-heading">
+        <h2 class="govuk-heading-m" id="help-heading">Get help with DPS</h2>
+        <h3 class="govuk-heading-s">Contact the helpdesk</h3>
+        <p class="govuk-body">Call 0800 917 5148 or #6598 from inside an establishment.</p>
+        <h3 class="govuk-heading-s">Tell us what you think</h3>
+        <p class="govuk-body">You can help improve DPS by {{ staticLink("giving us your feedback (opens in a new tab)") }}.</p>
+      </section>
+    </div>
+  </div>
+</main>
+{% endblock %}

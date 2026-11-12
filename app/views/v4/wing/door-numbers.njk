@@ -1,0 +1,20 @@
+{% from "../components/fields.njk" import cellInput %}
+{{ govukInsetText({text: "This is the actual number written on the cell door. It may be different to the cell number."}) }}
+<table class="govuk-table dps-number-table dps-number-table--doors">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Cell number</th>
+      <th scope="col" class="govuk-table__header">Cell door number</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    {% for cell in cells %}
+      {% set id = "door-" + loop.index %}
+      {% set reference = prefix + "-" + cell.number %}
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{ staticLink(reference) }}</th>
+        <td class="govuk-table__cell">{{ cellInput(id, "_door[]", "Door number for cell " + reference, cell.door, "text") }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

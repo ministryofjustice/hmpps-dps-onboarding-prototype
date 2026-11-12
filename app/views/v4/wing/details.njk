@@ -1,0 +1,20 @@
+{{ govukInput({
+  label: { text: "Wing code", classes: "govuk-!-font-weight-bold" },
+  hint: { text: "The letter or number used to identify the location, for example Wing A." },
+  id: "code",
+  name: "_code",
+  classes: "govuk-input--width-5",
+  value: fields.code,
+  spellcheck: false
+}) }}
+{{ govukInput({
+  label: { text: "Local name (optional)", classes: "govuk-!-font-weight-bold" },
+  hint: { text: "This will change how the name displays on location lists but won’t change the location code." },
+  id: "name",
+  name: "_name",
+  classes: "govuk-input--width-20",
+  value: fields.name,
+  describedBy: "name-count",
+  formGroup: { classes: "govuk-!-margin-bottom-1" }
+}) }}
+<p class="govuk-hint govuk-!-font-size-16 govuk-!-margin-bottom-6" id="name-count" data-name-count>You have 30 characters available</p>

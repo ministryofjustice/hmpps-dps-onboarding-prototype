@@ -1,0 +1,122 @@
+{% extends "./layout.html" %}
+{% from "../components/macros.njk" import summaryList %}
+{% from "../components/fields.njk" import structureFields, capacityTable %}
+
+{% block guideContent %}
+  {{ govukBackLink({text: "Back to example tasks", href: urls.practice, classes: "govuk-!-margin-top-0 govuk-!-margin-bottom-4"}) }}
+  <h2 class="govuk-heading-l">{{ title }}</h2>
+  <div class="dps-practice">
+    <header class="dps-practice__header">
+      <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-0">Try an example task</p>
+      {% if step != "intro" %}
+        {% if task == "wing" %}
+          <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-1">The example has wing code <strong>B</strong> and is set up with a spur, a landing and cells.</p>
+          <p class="govuk-body-s govuk-!-margin-bottom-0">The optional local name is <strong>Example wing</strong>.</p>
+        {% elif task == "cells" %}
+          <p class="govuk-body-s govuk-!-margin-top-2 govuk-!-margin-bottom-1">The example uses landing <strong>A-1</strong> in <strong>Wing A</strong>.</p>
+          <p class="govuk-body-s govuk-!-margin-bottom-0">The accommodation type is <strong>Normal accommodation</strong>.</p>
+        {% endif %}
+      {% endif %}
+    </header>
+    <div class="dps-practice__content">
+      {% if back %}{{ govukBackLink({text: "Back", href: back, classes: "govuk-!-margin-top-0 govuk-!-margin-bottom-4"}) }}{% endif %}
+      {% if step == "complete" %}
+        <h3 class="govuk-heading-l">Practice complete</h3>
+        {% if task == "wing" %}
+          <p class="govuk-body">No real wing or locations have been created or changed. No approval request has been sent.</p>
+        {% else %}
+          <p class="govuk-body">No real cells have been created or changed.</p>
+        {% endif %}
+        {{ govukButton({text: "Return to the wing guide" if task == "wing" else "Return to the Add cells guide", href: guide}) }}
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="{{ restart }}">Practise again</a></p>
+        <p class="govuk-body govuk-!-margin-bottom-0"><a class="govuk-link govuk-link--no-visited-state" href="{{ urls.practice }}">Choose a different practice task</a></p>
+      {% else %}
+        <form method="post" action="{{ action }}" novalidate{% if step == "structure" %} data-wing-form{% endif %}>
+          {% if step == "intro" %}
+            {% if task == "wing" %}
+              <h3 class="govuk-heading-l">Try creating a wing</h3>
+              <p class="govuk-body">Practise setting up Wing B with a spur, a landing and two cells. Enter the wing details, choose its structure and check the example locations.</p>
+            {% else %}
+              <h3 class="govuk-heading-l">Try adding cells</h3>
+              <h4 class="govuk-heading-m">Example location</h4>
+              {{ summaryList([["Wing", "Wing A"], ["Landing", "A-1"]]) }}
+              <p class="govuk-body">Enter how many cells to add, set their capacities and check the details.</p>
+            {% endif %}
+            {% set buttonText = "Start practice" %}
+          {% elif step == "details" %}
+            <h3 class="govuk-heading-l">Enter wing details</h3>
+            {{ govukInput({label: {text: "Wing code", classes: "govuk-label--m"}, id: "code", name: "_code", value: fields.code, classes: "govuk-input--width-5"}) }}
+            {{ govukInput({label: {text: "Local name (optional)", classes: "govuk-label--m"}, id: "name", name: "_name", value: fields.name, classes: "govuk-input--width-20"}) }}
+          {% elif step == "structure" %}
+            <h3 class="govuk-heading-l">Set wing structure</h3>
+            <p class="govuk-body">Choose the levels for the wing.</p>
+            {{ structureFields(levels, levelTypes, false) }}
+            <h4 class="govuk-heading-m">Structure preview</h4>
+            <div class="govuk-inset-text" aria-label="Wing structure" aria-live="polite" data-structure-preview data-inline-preview>Wing{% for level in levels %}{% if level %} → {{ level }}{% endif %}{% endfor %}</div>
+          {% elif step == "count" %}
+            <h3 class="govuk-heading-l">Enter cell details</h3>
+            {{ govukInput({label: {text: "How many cells do you want to create?", classes: "govuk-label--m"}, id: "count", name: "_count", value: count, classes: "govuk-input--width-5", inputmode: "numeric"}) }}
+            <h4 class="govuk-heading-m">Accommodation type</h4>
+            <p class="govuk-body">Normal accommodation</p>
+          {% elif step == "capacities" %}
+            <h3 class="govuk-heading-l">Enter cell capacities and type</h3>
+            {% if cells.length == 1 %}
+              {{ govukInsetText({text: "For this example, the cell number is A-1-031 and the door number is 31."}) }}
+            {% else %}
+              {{ govukInsetText({text: "We’ve entered the cell and door numbers for this example."}) }}
+            {% endif %}
+            {% set capacityHelp %}
+              <p class="govuk-body">Baseline CNA is how many people can live in a cell without overcrowding.</p>
+              <p class="govuk-body">Working capacity is how many can live there now, based on the beds, furniture and sanitation.</p>
+              <p class="govuk-body">Maximum capacity is the maximum number who could potentially live there.</p>
+            {% endset %}
+            {{ govukDetails({summaryText: "What the different types of cell capacity mean", html: capacityHelp}) }}
+            {{ capacityTable(cells, "A-1", capacityFields, linkNumbers = false, showCellType = false) }}
+          {% elif step == "review" and task == "wing" %}
+            <h3 class="govuk-heading-l">Check the example wing and locations</h3>
+            {{ govukInsetText({text: "We’ve entered the location codes and capacities for this example."}) }}
+            <h4 class="govuk-heading-m">Wing details</h4>
+            {{ summaryList([["Wing code", fields.code], ["Local name", fields.name or "Not entered"], ["Wing structure", "Wing → " + (levels | join(" → "))]]) }}
+            <h4 class="govuk-heading-m">Example locations</h4>
+            {% set exampleRows = [] %}
+            {% set exampleLocation = fields.code %}
+            {% if "Spurs" in levels %}
+              {% set exampleLocation = exampleLocation + "-1" %}
+              {% set added = exampleRows.push(["Spur", exampleLocation]) %}
+            {% endif %}
+            {% if "Landings" in levels %}
+              {% set exampleLocation = exampleLocation + "-1" %}
+              {% set added = exampleRows.push(["Landing", exampleLocation]) %}
+            {% endif %}
+            {% set added = exampleRows.push(["Cells", exampleLocation + "-001 and " + exampleLocation + "-002"], ["Capacity", "Each cell has a baseline CNA, working capacity and maximum capacity of 1."]) %}
+            {{ summaryList(exampleRows) }}
+            <p class="govuk-body">In the real service, the new locations are draft and a change to the cell certificate needs approval.</p>
+            {% set buttonText = "Submit for approval" %}
+          {% elif step == "review" %}
+            <h3 class="govuk-heading-l">Check and confirm the cell details</h3>
+            {{ govukInsetText({text: "We’ve filled in the accommodation type, use and sanitation details for this example."}) }}
+            {% set cellDetails = [["Number of cells", cells.length], ["Accommodation type", "Normal accommodation"], ["Used for", "Standard accommodation"]] %}
+            {% if cells.length == 1 %}
+              {% set cell = cells[0] %}
+              {% set added = cellDetails.push(["Cell number", "A-1-" + cell.number], ["Cell door number", cell.door], ["Baseline CNA", cell.baseline], ["Working capacity", cell.working], ["Maximum capacity", cell.maximum], ["Cell type", "Not set"], ["In-cell sanitation", "Yes"]) %}
+            {% endif %}
+            {{ summaryList(cellDetails) }}
+            {% if cells.length > 1 %}
+              {% for cell in cells %}
+                <h4 class="govuk-heading-m">Cell A-1-{{ cell.number }}</h4>
+                {{ summaryList([["Cell door number", cell.door], ["Baseline CNA", cell.baseline], ["Working capacity", cell.working], ["Maximum capacity", cell.maximum], ["Cell type", "Not set"], ["In-cell sanitation", "Yes"]]) }}
+              {% endfor %}
+            {% endif %}
+            {% set buttonText = "Create cells" %}
+          {% endif %}
+          {{ govukButton({text: buttonText or "Continue", classes: "govuk-!-margin-bottom-0", preventDoubleClick: true}) }}
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block pageScripts %}
+  {{ super() }}
+  {% if step == "structure" %}<script src="/public/javascripts/dps-patterns.js" defer></script>{% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "./layout.html" %}
+
+{% block guideContent %}
+  <h2 class="govuk-heading-l">{{ guidePageTitle }}</h2>
+  <p class="govuk-body">{{ guide.intro }}</p>
+  {% for section in guide.sections %}
+    <h3 class="govuk-heading-m">{{ section.title }}</h3>
+    {% for paragraph in section.paragraphs %}
+      <p class="govuk-body">{{ paragraph }}</p>
+    {% endfor %}
+    {% if section.image %}
+      <figure class="dps-guide-figure govuk-!-margin-bottom-5">
+        <img src="{{ guidanceImages }}/{{ section.image.file }}" width="400" height="{{ section.image.height }}" alt="{{ section.image.alt }}">
+        {% if section.image.caption %}
+          <figcaption class="govuk-body-s govuk-!-margin-top-4 govuk-!-margin-bottom-0">{{ section.image.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    {% endif %}
+  {% endfor %}
+  <h3 class="govuk-heading-m">If you’re ready to start</h3>
+  {{ govukButton({text: "Go to residential locations", href: urls.residential}) }}
+  {% if activeGuide == "wing" %}
+    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="{{ practiceUrl }}">Practise setting up a wing</a></p>
+  {% else %}
+    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="{{ practiceUrl }}">Practise adding cells</a></p>
+  {% endif %}
+{% endblock %}

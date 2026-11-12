@@ -1,0 +1,20 @@
+{% extends "../layout.html" %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "../components/macros.njk" import productHelpLink %}
+
+{% block container %}
+<main id="main-content" class="govuk-main-wrapper dps-content {{ serviceMainClasses }}">
+  <div class="govuk-width-container dps-top">
+    <div class="dps-top__row">
+      <div>{% block serviceNavigation %}{% endblock %}</div>
+      {% block productHelp %}
+        {% if showProductHelp %}{{ productHelpLink(productHelpText, urls.help, prominent = true) }}{% endif %}
+      {% endblock %}
+    </div>
+  </div>
+  <div class="govuk-width-container">
+    {% block serviceContent %}{% endblock %}
+  </div>
+  {% block afterServiceContent %}{% endblock %}
+</main>
+{% endblock %}

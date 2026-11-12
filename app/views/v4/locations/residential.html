@@ -1,0 +1,74 @@
+{% extends "../includes/service-layout.html" %}
+{% from "../components/macros.njk" import staticLink, feedback %}
+{% set pageName = "Manage residential locations" %}
+
+{% set wings = [
+  ["WING A", "197", "252", "3", "Normal accommodation / Other", "Standard accommodation"],
+  ["WING B", "142", "152", "2", "Normal accommodation", "Standard accommodation"],
+  ["wing c", "176", "222", "1", "Normal accommodation", "Standard accommodation"],
+  ["wing e", "153", "184", "0", "Normal accommodation / Other", "Standard accommodation / Young persons"],
+  ["wing h", "0", "3", "10", "Care and separation / Healthcare inpatients", "–"],
+  ["wing j", "11", "12", "1", "Care and separation / Normal accommodation", "Standard accommodation"]
+] %}
+
+{% block serviceNavigation %}
+  {{ govukBreadcrumbs({items: [{text: "Digital Prison Services", href: urls.home}, {text: "Locations - Lincoln (HMP)", href: urls.locations}]}) }}
+{% endblock %}
+
+{% block serviceContent %}
+  <h1 class="govuk-heading-l">{{ pageName }}</h1>
+  <h2 class="govuk-heading-m">Overall establishment capacity</h2>
+  <dl class="dps-stat-grid dps-stat-grid--residential">
+    {% for item in [["Working capacity", "679"], ["Signed operational capacity", "0", "Change"], ["Maximum capacity", "825"]] %}
+      <div class="dps-stat">
+        <dt class="govuk-body govuk-!-font-weight-bold">{{ item[0] }}</dt>
+        <dd class="govuk-heading-l govuk-!-font-weight-regular">{{ item[1] }}</dd>
+        {% if item[2] %}<dd class="govuk-body">{{ staticLink(item[2]) }}</dd>{% endif %}
+      </div>
+    {% endfor %}
+  </dl>
+  {% call govukDetails({summaryText: "What the different types of capacity mean", classes: "dps-capacity-help"}) %}
+    <p class="govuk-body"><strong>Maximum capacity</strong><br>
+      The maximum capacity is the total number of people an establishment could hold if all potential spaces (including care and separation units and healthcare) are used for residential locations.</p>
+    <p class="govuk-body"><strong>Signed operational capacity</strong><br>
+      The signed operational capacity is approved by the prison governor. It is the establishment’s maximum capacity minus the capacity of cells that are long term out of action or are not typically used for someone to live in permanently (for example care and separation units or healthcare).</p>
+    <p class="govuk-body govuk-!-margin-bottom-0"><strong>Working capacity</strong><br>
+      The working capacity is the operational capacity of all normal accommodation cells minus the capacity of any short term out of action normal accommodation cells.</p>
+  {% endcall %}
+  <h2 class="govuk-heading-m">Wings</h2>
+  <form action="{{ urls.wing }}/start" method="post">
+    {{ govukButton({ text: "Create new wing", classes: "govuk-button--secondary" }) }}
+  </form>
+  <div class="dps-table-scroll dps-wings-table" tabindex="0" role="region" aria-label="Wings">
+    <table class="govuk-table">
+      <colgroup>
+        <col class="dps-wing-name">
+        <col span="4" class="dps-wing-metric">
+        <col class="dps-wing-accommodation">
+        <col>
+      </colgroup>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          {% for heading in ["Location", "Status", "Working capacity", "Maximum capacity", "Inactive cells", "Accommodation type", "Used for"] %}
+            <th scope="col" class="govuk-table__header">{{ heading }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for row in wings %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">{{ staticLink(row[0]) }}</th>
+            <td class="govuk-table__cell">Active</td>
+            {% for value in row.slice(1) %}
+              <td class="govuk-table__cell">{{ value }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block afterServiceContent %}
+  <div class="govuk-width-container">{{ feedback() }}</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% from "../components/fields.njk" import cellInput %}
+<div class="dps-bulk">
+  {% set applyNumbering %}{{ linkButton("Apply", "_action", "apply") }}{% endset %}
+  {{ govukInput({
+    id: "start", name: "_start", value: start, inputmode: "numeric",
+    classes: "govuk-input--width-5",
+    label: {text: "Start cell numbering from", classes: "govuk-!-font-weight-bold"},
+    formGroup: {classes: "govuk-!-margin-bottom-0", afterInput: {html: applyNumbering} },
+    inputWrapper: {classes: "dps-bulk-controls"}
+  }) }}
+</div>
+
+<table class="govuk-table dps-number-table dps-number-table--cells">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Cell</th>
+      <th scope="col" class="govuk-table__header">Cell number</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    {% for cell in cells %}
+      {% set id = "number-" + loop.index %}
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header govuk-!-font-weight-regular">Cell {{ loop.index }}</th>
+        <td class="govuk-table__cell">
+          <div class="dps-cell-number">
+            <span aria-hidden="true">{{ prefix }}-</span>
+            {{ cellInput(id, "_number[]", "Number for cell " + loop.index + " on " + prefix, cell.number) }}
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

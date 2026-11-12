@@ -1,0 +1,49 @@
+{% extends "../includes/service-layout.html" %}
+{% from "../components/macros.njk" import staticLink, feedback, linkButton %}
+{% from "../components/fields.njk" import capacityTable %}
+{% set serviceMainClasses = "dps-task" %}
+{% set pageName = heading %}
+
+{% block serviceNavigation %}
+  {{ govukBackLink({text: "Back", href: back}) }}
+{% endblock %}
+
+{% block serviceContent %}
+  <div class="dps-task-grid">
+    <header class="dps-task-heading">
+      <span class="govuk-caption-l">{{ caption }}</span>
+      <h1 class="govuk-heading-l">{{ heading }}</h1>
+    </header>
+    {% if variant == "contextual" and help %}
+      {% set helpSummary %}
+        <span class="dps-context-help__open">Help with this page</span>
+        <span class="dps-context-help__close">Close help</span>
+      {% endset %}
+      {% call govukDetails({classes: "dps-context-help", summaryHtml: helpSummary}) %}
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-3" tabindex="-1">Help</h2>
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-3">{{ help.title }}</h3>
+        {% for paragraph in help.paragraphs %}
+          <p class="govuk-body">{{ paragraph }}</p>
+        {% endfor %}
+      {% endcall %}
+    {% endif %}
+
+    <form class="dps-task-form" action="{{ action }}" method="post" novalidate data-wing-form>
+      {% if step in ["structure", "cell-numbers", "capacities"] %}<button type="submit" hidden>Continue</button>{% endif %}
+      {% include "./" + step + ".njk" %}
+      {{ govukButton({text: "Create wing" if step == "review" else "Continue", preventDoubleClick: true}) }}
+    </form>
+    <form class="dps-task-cancel" action="{{ urls.wing }}/cancel" method="post">
+      {{ linkButton("Cancel", "_cancel", "1") }}
+    </form>
+  </div>
+{% endblock %}
+
+{% block afterServiceContent %}
+  <div class="govuk-width-container">{{ feedback() }}</div>
+{% endblock %}
+
+{% block pageScripts %}
+  {{ super() }}
+  <script src="/public/javascripts/dps-patterns.js" defer></script>
+{% endblock %}

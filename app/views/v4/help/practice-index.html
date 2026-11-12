@@ -1,0 +1,14 @@
+{% extends "./layout.html" %}
+
+{% block guideContent %}
+  <h2 class="govuk-heading-l">Try an example task</h2>
+  <h3 class="govuk-heading-m">Choose what to practise</h3>
+  <p class="govuk-body">Try out the steps for setting up a wing or adding cells in Locations.</p>
+  <h3 class="govuk-heading-m">Set up a new wing and its cells</h3>
+  <p class="govuk-body">Enter wing details, choose a structure and review an example setup.</p>
+  {{ govukButton({text: "Practise setting up a wing", href: urls.practice + "/wing"}) }}
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  <h3 class="govuk-heading-m">Add cells to an existing location</h3>
+  <p class="govuk-body">Start with an example location already selected, then add and check a cell.</p>
+  {{ govukButton({text: "Practise adding cells", href: urls.practice + "/cells"}) }}
+{% endblock %}

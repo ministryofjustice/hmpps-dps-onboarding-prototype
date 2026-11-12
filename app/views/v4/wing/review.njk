@@ -1,0 +1,25 @@
+<p class="govuk-body">You are about to create a new wing.</p>
+<p class="govuk-body">You can add {{ levels | join(", ") | lower | replace(", cells", " and cells") }} to the wing once it is created.</p>
+
+{{ govukSummaryList({
+  card: { title: { text: "Wing details" } },
+  rows: [
+    {
+      key: { text: "Wing code" },
+      value: { text: fields.code },
+      actions: { items: [{ href: urls.wing + "/details?change=1#code", text: "Change", classes: "govuk-link--no-visited-state", visuallyHiddenText: "wing code" }] }
+    },
+    {
+      key: { text: "Local name" },
+      value: { text: fields.name or "Not entered" },
+      actions: { items: [{ href: urls.wing + "/details?change=1#name", text: "Change", classes: "govuk-link--no-visited-state", visuallyHiddenText: "local name" }] }
+    },
+    {
+      key: { text: "Wing structure" },
+      value: { text: "Wing → " + (levels | join(" → ")) },
+      actions: { items: [{ href: urls.wing + "/structure?change=1", text: "Change", classes: "govuk-link--no-visited-state", visuallyHiddenText: "wing structure" }] }
+    }
+  ]
+}) }}
+
+{{ govukWarningText({text: "This location will be in draft until it is added to the cell certificate."}) }}

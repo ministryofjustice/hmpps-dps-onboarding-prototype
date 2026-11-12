@@ -1,0 +1,55 @@
+{% extends "../includes/service-layout.html" %}
+{% from "../components/macros.njk" import cards, productHelpLink %}
+{% set pageName = "Locations" %}
+{% set serviceMainClasses = "dps-landing" %}
+{% set dpsFooterService = "Locations" %}
+
+{% block serviceNavigation %}
+  {{ govukBreadcrumbs({items: [{text: "Digital Prison Services", href: urls.home}]}) }}
+{% endblock %}
+
+{% block serviceContent %}
+  {% if showProductHelp %}
+    <section class="dps-welcome" aria-labelledby="welcome-title">
+      <div class="dps-welcome__heading">
+        <h2 id="welcome-title" class="govuk-heading-m">New to Locations?</h2>
+        <button class="govuk-link govuk-link--no-visited-state dps-link-button" type="button" id="dismiss-welcome" hidden>Dismiss</button>
+      </div>
+      <p class="govuk-body">Use Locations to manage residential and non-residential locations in your establishment. Learn how to use the service and complete common tasks.</p>
+      <p class="govuk-body">{{ productHelpLink("Get help using Locations", urls.help) }}</p>
+    </section>
+  {% endif %}
+  <h1 class="govuk-heading-l" id="dps-title" tabindex="-1">Locations</h1>
+{% endblock %}
+
+{% block pageScripts %}
+  {{ super() }}
+  {% if showProductHelp %}
+    <script>
+      const dismissWelcome = document.getElementById('dismiss-welcome')
+      dismissWelcome.hidden = false
+      dismissWelcome.addEventListener('click', () => {
+        dismissWelcome.closest('section').remove()
+        document.getElementById('dps-title').focus()
+      })
+    </script>
+  {% endif %}
+{% endblock %}
+
+{% block afterServiceContent %}
+  <div class="dps-cards-band">
+    <div class="govuk-width-container">
+      <h2 class="govuk-heading-m">Residential locations</h2>
+      {{ cards([
+        { title: "Manage residential locations", href: urls.residential, description: "View and update information about existing locations or create new residential locations." },
+        { title: "View all inactive cells", description: "View details of all inactive cells in the establishment and reactivate them." },
+        { title: "Archived locations", description: "View locations that have been permanently deactivated as residential locations." },
+        { title: "Cell certificate", description: "View the current certificate and requested changes." },
+        { title: "Import cell certificate", description: "Import a certificate for this establishment or view previously imported certificates." },
+        { title: "Capacity management dashboard", description: "View a summary of cell certificates and change requests for every establishment." }
+      ]) }}
+      <h2 class="govuk-heading-m">Non-residential locations</h2>
+      {{ cards([{title: "Edit non-residential locations", description: "Add, change or archive non-residential locations."}]) }}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% from "../components/fields.njk" import structureFields %}
+<p class="govuk-body">The wing will be set up with these levels. You can change them if this wing is built differently.</p>
+<p class="govuk-body">You will add locations to each level later.</p>
+{{ structureFields(levels, levelTypes) }}
+<h2 class="govuk-heading-m">Structure preview</h2>
+<ol class="govuk-list dps-structure-preview" aria-label="Wing structure" aria-live="polite" data-structure-preview>
+  <li>Wing</li>
+  {% for level in levels %}{% if level %}<li>{{ level }}</li>{% endif %}{% endfor %}
+</ol>

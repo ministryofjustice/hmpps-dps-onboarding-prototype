@@ -1,0 +1,46 @@
+{% extends "./layout.html" %}
+
+{% block guideContent %}
+  <h2 class="govuk-heading-l">{{ guideTitle }}</h2>
+  <ol class="govuk-list dps-walkthrough-steps" aria-label="Sections in this walkthrough">
+    {% for entry in steps %}
+      <li>
+        {% if loop.index == section %}
+          <strong aria-current="step">{{ loop.index }}. {{ entry.title }}</strong>
+        {% else %}
+          <a class="govuk-link govuk-link--no-visited-state" href="{{ entry.href }}">{{ loop.index }}. {{ entry.title }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+  <h3 class="govuk-heading-m">Section {{ section }} of {{ steps.length }}: {{ step.title }}</h3>
+  {% if step.intro %}<p class="govuk-body">{{ step.intro }}</p>{% endif %}
+  {% for item in step.rows %}
+    <section class="dps-guide-example">
+      <div>
+        <h4 class="govuk-heading-s">{{ item.title }}</h4>
+        <p class="govuk-body">{{ item.body }}</p>
+      </div>
+      <img src="{{ guidanceImages }}/{{ item.image }}" width="{{ item.width }}" height="{{ item.height }}" alt="" loading="lazy">
+    </section>
+  {% endfor %}
+
+  {% if not next and activeGuide == "wing" %}
+    <h4 class="govuk-heading-s">After you submit the request</h4>
+    <p class="govuk-body">The request is reviewed by the establishment’s authorising director. You cannot change these locations while the request is being reviewed.</p>
+  {% endif %}
+  {% if not next %}
+    {{ govukButton({text: "Go to residential locations", href: urls.residential}) }}
+    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="{{ practiceUrl }}">{{ "Practise setting up a wing" if activeGuide == "wing" else "Practise adding cells" }}</a></p>
+  {% endif %}
+
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  {{ govukPagination({
+    classes: "dps-walkthrough-pagination",
+    previous: {href: previous.href, labelText: previous.title} if previous,
+    next: {href: next.href, labelText: next.title} if next
+  }) }}
+{% endblock %}

@@ -1,0 +1,18 @@
+<section class="dps-bulk" aria-labelledby="bulk-title">
+  <h2 class="govuk-heading-s govuk-!-margin-bottom-2" id="bulk-title">Apply capacity values to all cells</h2>
+  {% for field in capacityFields %}
+    {% set id = "all-" + field.name %}
+    {% set applyCapacity %}
+      <button class="govuk-link govuk-link--no-visited-state dps-link-button" type="submit" name="_action" value="{{ field.name }}">Apply to all<span class="govuk-visually-hidden"> for {{ field.label }}</span></button>
+    {% endset %}
+    {{ govukInput({
+      id: id, name: "_all_" + field.name, value: bulk[field.name], inputmode: "numeric",
+      classes: "govuk-input--width-3",
+      label: {text: field.fullLabel},
+      formGroup: {classes: "dps-bulk-row govuk-!-margin-bottom-0", afterInput: {html: applyCapacity} },
+      inputWrapper: {classes: "dps-bulk-controls"}
+    }) }}
+  {% endfor %}
+</section>
+
+{{ capacityTable(cells, prefix, capacityFields) }}

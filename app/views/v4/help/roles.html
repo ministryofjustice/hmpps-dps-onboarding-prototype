@@ -1,0 +1,37 @@
+{% extends "./layout.html" %}
+
+{% block guideContent %}
+  <h2 class="govuk-heading-l">{{ guidePageTitle }}</h2>
+
+  <h3 class="govuk-heading-m">Cell status manager</h3>
+  <p class="govuk-body">Wing managers and some prison officers will usually have this role. As a cell status manager, you can:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>view the status and capacity of locations</li>
+    <li>temporarily deactivate cells that cannot be used</li>
+    <li>reactivate cells when they become available again</li>
+    <li>view the current and previous versions of the cell certificate</li>
+  </ul>
+
+  <h3 class="govuk-heading-m">Certificate administrator</h3>
+  <p class="govuk-body">Heads of residence and some custodial managers will usually have this role.</p>
+  <p class="govuk-body">As a certificate administrator, you can:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>manage residential location information</li>
+    <li>update capacity, status and location details</li>
+    <li>create new locations</li>
+    <li>submit changes to the cell certificate</li>
+    <li>check the status of submissions</li>
+    <li>view the current and previous versions of the cell certificate</li>
+  </ul>
+  <p class="govuk-body">Any change that affects the cell certificate must be approved by your prison group's authorising director before it is applied.</p>
+
+  <h3 class="govuk-heading-m">Certificate reviewer</h3>
+  <p class="govuk-body">Prison group directors and operational managers in prison group director offices will usually have this role.</p>
+  <p class="govuk-body">As a certificate reviewer, you can:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>review requests to change the cell certificate</li>
+    <li>assess proposed changes</li>
+    <li>approve or reject requests</li>
+    <li>view the current and previous versions of the cell certificate</li>
+  </ul>
+{% endblock %}

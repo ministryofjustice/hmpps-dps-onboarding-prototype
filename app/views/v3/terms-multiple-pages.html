@@ -21,13 +21,13 @@
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
       {% for section in sections %}
-        {% include "includes/v3/terms/" + section + ".njk" %}
+        {% include "./includes/terms/" + section + ".njk" %}
       {% endfor %}
 
       {% if nextUrl %}
         {{ govukButton({ text: "Continue", href: nextUrl }) }}
       {% else %}
-        {% include "includes/v3/terms/acceptance.njk" %}
+        {% include "./includes/terms/acceptance.njk" %}
       {% endif %}
     </div>
   </div>

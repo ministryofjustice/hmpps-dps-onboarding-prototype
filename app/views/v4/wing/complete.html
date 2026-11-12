@@ -1,0 +1,13 @@
+{% extends "../includes/service-layout.html" %}
+{% set pageName = heading %}
+{% set serviceMainClasses = "dps-complete" %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block productHelp %}{% endblock %}
+
+{% block serviceContent %}
+  <h1 class="govuk-heading-l">{{ heading }}</h1>
+  <p class="govuk-body">You have reached the end of the prototype journey.</p>
+  {{ govukButton({text: "Go to prototype home", href: "/", classes: "govuk-button--secondary"}) }}
+{% endblock %}

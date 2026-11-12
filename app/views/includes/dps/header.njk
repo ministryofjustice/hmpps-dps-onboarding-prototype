@@ -1,4 +1,3 @@
-{# Official rendered DPS header from the saved pre-production page; links adapted for this prototype. #}
 <header class="govuk-template__header">
           
         
@@ -15,12 +14,9 @@
     </div>
 
     <div class="cdps-header__item cdps-header__item--spacer">
-      
-        <strong class="govuk-tag" data-qa="cdps-header-environment-tag">
-  DEV
-</strong>
-
-      
+      {% if not hideDpsEnvironmentTag %}
+        <strong class="govuk-tag" data-qa="cdps-header-environment-tag">DEV</strong>
+      {% endif %}
     </div>
 
     

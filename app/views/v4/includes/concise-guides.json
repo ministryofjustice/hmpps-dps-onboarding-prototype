@@ -1,0 +1,70 @@
+{
+  "wing": {
+    "intro": "Create the wing and its locations, then request the change to the cell certificate.",
+    "sections": [
+      {
+        "title": "Before you start",
+        "paragraphs": ["Have the wing and location codes, the physical structure, cell numbering, capacities and other cell details ready."]
+      },
+      {
+        "title": "Create the wing and choose its structure",
+        "paragraphs": ["Open Manage residential locations and select Create new wing. Enter its code and optional local name. Choose the levels to match the wing, then check and create it."],
+        "image": {
+          "file": "structure.png",
+          "height": 392,
+          "alt": "Set wing structure page with level types selected and the resulting structure preview.",
+          "caption": "This example has spurs, landings and cells. Other wings may be structured differently."
+        }
+      },
+      {
+        "title": "Add spurs and landings",
+        "paragraphs": ["Open the draft wing and create the next locations in its structure. Enter and check their codes and names. When creating a landing, you can choose to create its cells now or later."]
+      },
+      {
+        "title": "Create and number the cells",
+        "paragraphs": ["Enter the number of cells and accommodation type. Set the cell numbers and the actual numbers on the doors."]
+      },
+      {
+        "title": "Set capacities and other details",
+        "paragraphs": ["Enter baseline CNA, working capacity and maximum capacity for each cell. Check any values applied to all cells. Record cell types, what the cells are used for and whether they have in-cell sanitation."]
+      },
+      {
+        "title": "Check the locations and request approval",
+        "paragraphs": [
+          "Check and create the locations. They remain in draft. Once the wing’s locations are ready, select Add wing to cell certificate. Review the request and certification statement, then Submit for approval.",
+          "The request goes to the establishment’s authorising director. You cannot change the locations while it is being reviewed."
+        ]
+      }
+    ]
+  },
+  "add-cells": {
+    "intro": "Create cells within a wing and landing that already exist.",
+    "sections": [
+      {
+        "title": "Before you start",
+        "paragraphs": ["Have the location, cell numbers and door numbers, accommodation type, capacities and other cell information ready."]
+      },
+      {
+        "title": "Find the location",
+        "paragraphs": ["Open Manage residential locations, select the wing and then the landing. Under Cells, select Create new cells. You do not need to create the wing or landing again."]
+      },
+      {
+        "title": "Enter and number the cells",
+        "paragraphs": ["Enter how many cells to create and select the accommodation type. Set their cell numbers and the actual numbers written on their doors."]
+      },
+      {
+        "title": "Set capacities and other cell details",
+        "paragraphs": ["Enter baseline CNA, working capacity and maximum capacity. Use Apply to all when the same value is appropriate, then check each cell. Add cell types where needed, select their uses and confirm in-cell sanitation."],
+        "image": {
+          "file": "cell-capacity.png",
+          "height": 314,
+          "alt": "Cell capacities page showing Apply to all controls and an example cell’s capacities."
+        }
+      },
+      {
+        "title": "Check and create the cells",
+        "paragraphs": ["Check the details and use Change to correct anything. Select Create cells. The new cells appear on the existing landing as Draft."]
+      }
+    ]
+  }
+}

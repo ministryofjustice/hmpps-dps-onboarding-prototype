@@ -42,3 +42,10 @@ addFilter('prototypeHmppsHeader', (html, signedIn) => {
   const header = signedIn ? html : html.replace(/<nav\b[^>]*>[\s\S]*?<\/nav>/g, '')
   return prototypeHeaderLinks(header)
 }, { renderAsHtml: true })
+
+// Retain the shared DPS shell's visual styling for controls outside the Locations journeys.
+addFilter('staticDpsLinks', (html, keepHomeLink) => html.replace(/<a\b[^>]*>/g, tag => {
+  if (keepHomeLink && /\shref="\/"/.test(tag)) return tag
+  return tag.replace(/\s+(?:href|role|aria-controls|aria-expanded|target)="[^"]*"/g, '')
+    .replace(/>$/, ' aria-disabled="true">')
+}), { renderAsHtml: true })

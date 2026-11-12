@@ -1,0 +1,76 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "./macros.njk" import staticLink, linkButton %}
+
+{% macro structureFields(levels, levelTypes, editableCount = true) %}
+  <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-2">Level 1 type</p>
+  <p class="govuk-body govuk-!-margin-bottom-6">Wing</p>
+  {% for level in levels %}
+    {% set levelIndex = loop.index + 1 %}
+    {% set selectItems = [{text: "Select a level type", value: "", selected: not level}] %}
+    {% for option in levelTypes %}
+      {% set added = selectItems.push({text: option, value: option, selected: option == level}) %}
+    {% endfor %}
+    {% set removeLevel %}
+      {% if editableCount and levelIndex > 2 %}
+        <p class="govuk-body govuk-!-margin-bottom-2">
+          {{ linkButton("Remove level", "_action", "remove-" + levelIndex) }}
+        </p>
+      {% endif %}
+    {% endset %}
+    {{ govukSelect({
+      id: "level" + levelIndex, name: "_level" + levelIndex, items: selectItems,
+      label: {text: "Level " + levelIndex + " type", classes: "govuk-!-font-weight-bold"},
+      formGroup: { beforeInput: { html: removeLevel } },
+      classes: "dps-level-select",
+      attributes: { "data-level-select": "" }
+    }) }}
+  {% endfor %}
+  {% if editableCount and levels.length < 3 %}
+    <p class="govuk-body" data-add-level>{{ linkButton("Add level", "_action", "add-level") }}</p>
+  {% endif %}
+{% endmacro %}
+
+{% macro cellInput(id, name, label, value, mode = "numeric") %}
+  {{ govukInput({
+    id: id, name: name, label: { text: label, classes: "govuk-visually-hidden" },
+    value: value, inputmode: mode, classes: "govuk-input--width-3",
+    spellcheck: false,
+    formGroup: { classes: "govuk-!-margin-bottom-0" }
+  }) }}
+{% endmacro %}
+
+{% macro capacityTable(cells, prefix, fields, linkNumbers = true, showCellType = true) %}
+  <div class="dps-table-scroll" tabindex="0" role="region" aria-label="Cell capacities">
+    <table class="govuk-table dps-cell-capacity-table">
+      <colgroup>
+        <col class="dps-cell-reference">
+        <col span="3" class="dps-cell-capacity">
+        {% if showCellType %}<col>{% endif %}
+      </colgroup>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Cell number</th>
+          {% for field in fields %}<th scope="col" class="govuk-table__header">{{ field.label }}</th>{% endfor %}
+          {% if showCellType %}<th scope="col" class="govuk-table__header">Cell type (optional)</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% for cell in cells %}
+          {% set row = loop.index %}
+          {% set reference = prefix + "-" + cell.number %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header{% if linkNumbers %} govuk-!-font-weight-regular{% endif %}">
+              {% if linkNumbers %}{{ staticLink(reference) }}{% else %}{{ reference }}{% endif %}
+            </th>
+            {% for field in fields %}
+              {% set id = field.name + "-" + row %}
+              <td class="govuk-table__cell">{{ cellInput(id, "_" + field.name + "[]", field.label + " for cell " + reference, cell[field.name]) }}</td>
+            {% endfor %}
+            {% if showCellType %}<td class="govuk-table__cell">{{ staticLink("Add") }}</td>{% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endmacro %}
