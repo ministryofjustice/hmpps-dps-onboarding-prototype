@@ -15,7 +15,7 @@ const inertLinks = html => html.replace(/<a\b[^>]*>/g, tag =>
 addFilter('inertLinks', inertLinks, { renderAsHtml: true })
 
 addFilter('footerTermsLink', (html, url) => html.replace(
-  /(<a\b[^>]*)(>\s*Terms and conditions\s*<\/a>)/g,
+  /(<a\b[^>]*)(>\s*(?:Terms and conditions|Acceptable use statement)\s*<\/a>)/g,
   (match, tag, content) => tag.replace(/\shref="[^"]*"/g, ' href="' + url + '"') + content
 ), { renderAsHtml: true })
 
@@ -44,8 +44,8 @@ addFilter('prototypeHmppsHeader', (html, signedIn) => {
 }, { renderAsHtml: true })
 
 // Retain the shared DPS shell's visual styling for controls outside the Locations journeys.
-addFilter('staticDpsLinks', (html, keepHomeLink) => html.replace(/<a\b[^>]*>/g, tag => {
-  if (keepHomeLink && /\shref="\/"/.test(tag)) return tag
+addFilter('staticDpsLinks', (html, keepHref) => html.replace(/<a\b[^>]*>/g, tag => {
+  if (keepHref && tag.includes(' href="' + keepHref + '"')) return tag
   return tag.replace(/\s+(?:href|role|aria-controls|aria-expanded|target)="[^"]*"/g, '')
     .replace(/>$/, ' aria-disabled="true">')
 }), { renderAsHtml: true })

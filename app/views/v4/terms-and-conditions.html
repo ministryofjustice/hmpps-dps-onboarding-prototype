@@ -1,0 +1,13 @@
+{% extends "layouts/hmpps-terms.html" %}
+{% set pageName = "Acceptable use statement" %}
+{% set signedIn = true %}
+{% set termsReadOnly = true %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">{{ pageName }}</h1>
+{% include "./includes/terms/all-sections.njk" %}
+  </div>
+</div>
+{% endblock %}

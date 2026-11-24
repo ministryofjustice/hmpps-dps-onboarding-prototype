@@ -1,0 +1,24 @@
+{% extends "layouts/hmpps-terms.html" %}
+{% set pageName = ("Error: " if termsError) + "Acceptable use statement" %}
+{% set signedIn = true %}
+{% set termsWithAnchors = true %}
+{% set termsErrorMessage = "You must accept the acceptable use statement to continue" %}
+
+{% block content %}
+    {% if termsError %}
+      {{ govukErrorSummary({
+        titleText: "There is a problem",
+        errorList: [{ text: termsErrorMessage, href: "#terms-accepted" }]
+      }) }}
+    {% endif %}
+
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-8">Acceptable use statement</h1>
+
+<div class="govuk-grid-row terms-layout">
+  <div class="govuk-grid-column-three-quarters terms-content">
+    <h2 class="govuk-heading-m" id="terms-introduction" tabindex="-1">Before you start using HMPPS Digital Services</h2>
+{% include "./includes/terms/all-sections.njk" %}
+{% include "./includes/terms/acceptance.njk" %}
+  </div>
+</div>
+{% endblock %}
