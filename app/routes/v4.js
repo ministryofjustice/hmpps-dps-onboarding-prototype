@@ -37,8 +37,11 @@ module.exports = router => {
     res.locals.showProductHelp = variant === 'walkthrough' || variant === 'concise'
     res.locals.productHelpText = 'Help using Locations'
     res.locals.urls = urls
+    res.locals.termsUrl = v + 'terms-and-conditions'
     next()
   })
+
+  registerTermsRoutes(router)
 
   router.get(urls.home, (req, res) => res.render(vGet + 'dps-home'))
   router.get(locations, (req, res) => res.render(vGet + 'locations/index'))
@@ -312,6 +315,88 @@ function showWingForm(req, res, step, editedLevels) {
   }
 
   res.render(vGet + 'wing/form', values)
+}
+
+const termsParts = [
+  {
+    title: 'Before you start using HMPPS Digital Services',
+    sections: ['introduction', 'what-are-hmpps-digital-services', 'who-we-are', 'misuse']
+  },
+  {
+    title: 'Accessing information responsibly',
+    sections: ['accessing-information']
+  },
+  {
+    title: 'Keeping information and your account secure',
+    sections: ['keeping-information-secure', 'protecting-your-account', 'reporting-security-breaches']
+  },
+  {
+    title: 'Using HMPPS Digital Services professionally',
+    sections: ['keeping-records-accurate', 'monitoring-your-activity']
+  },
+  {
+    title: 'Your information and accepting the terms',
+    sections: ['your-personal-details']
+  }
+]
+
+const termsPartUrl = part => v + 'terms-multiple-pages' + (part === 1 ? '' : '-' + part)
+const withHtmlAlias = path => [path, path + '.html']
+const multiplePagesSignIn = v + 'sign-in-multiple-pages'
+
+function renderTermsPart(res, part, termsError = false) {
+  res.render(vGet + 'terms-multiple-pages', {
+    ...termsParts[part - 1],
+    part,
+    totalParts: termsParts.length,
+    backUrl: part === 1 ? multiplePagesSignIn : termsPartUrl(part - 1),
+    nextUrl: part < termsParts.length ? termsPartUrl(part + 1) : null,
+    termsError
+  })
+}
+
+function acceptTerms(renderError) {
+  return (req, res) => {
+    const accepted = [req.body['terms-accepted']].flat().includes('accepted')
+
+    if (!accepted) return renderError(res)
+
+    res.redirect(v + 'select-service')
+  }
+}
+
+function registerTermsRoutes(router) {
+  const staticTerms = v + 'terms-with-static-contents'
+  const signInJourneys = [
+    { path: v + 'sign-in-with-static-contents', termsPath: staticTerms },
+    { path: multiplePagesSignIn, termsPath: termsPartUrl(1) }
+  ]
+
+  for (const { path, termsPath } of signInJourneys) {
+    router.get(withHtmlAlias(path), (req, res) => res.render(vGet + 'sign-in'))
+    router.post(withHtmlAlias(path), (req, res) => res.redirect(termsPath))
+  }
+
+  router.get(withHtmlAlias(staticTerms), (req, res) => res.render(vGet + 'terms-with-static-contents'))
+  router.post(
+    withHtmlAlias(staticTerms),
+    acceptTerms(res => res.render(vGet + 'terms-with-static-contents', { termsError: true }))
+  )
+
+  termsParts.forEach((_, index) => {
+    const part = index + 1
+    router.get(withHtmlAlias(termsPartUrl(part)), (req, res) => renderTermsPart(res, part))
+  })
+
+  router.post(
+    withHtmlAlias(termsPartUrl(termsParts.length)),
+    acceptTerms(res => renderTermsPart(res, termsParts.length, true))
+  )
+
+  router.get(withHtmlAlias(v + 'terms-and-conditions'), (req, res) => res.render(vGet + 'terms-and-conditions'))
+  router.get(withHtmlAlias(v + 'select-service'), (req, res) => res.render(vGet + 'select-service', {
+    routes: { dpsHome: urls.home }
+  }))
 }
 
 const requireProgress = path => (req, res, next) => {

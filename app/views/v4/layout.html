@@ -8,10 +8,10 @@
 {% block header %}
   {% set hideDpsEnvironmentTag = true %}
   {% set headerHtml %}{% include "includes/dps/header.njk" %}{% endset %}
-  {{ headerHtml | staticDpsLinks(true) }}
+  {{ headerHtml | staticDpsLinks("/") }}
 {% endblock %}
 
 {% block footer %}
   {% set footerHtml %}{% include "includes/dps/footer.njk" %}{% endset %}
-  {{ footerHtml | staticDpsLinks }}
+  {{ footerHtml | staticDpsLinks(termsUrl) }}
 {% endblock %}
