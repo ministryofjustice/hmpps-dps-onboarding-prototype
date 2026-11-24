@@ -1,7 +1,7 @@
 {% extends "layouts/hmpps-terms.html" %}
 {% set pageName = ("Error: " if termsError) + title %}
 {% set signedIn = true %}
-{% set termsErrorMessage = "You must accept the terms and conditions to continue" %}
+{% set termsErrorMessage = "You must accept the acceptable use statement to continue" %}
 
 {% block beforeContent %}
   {{ govukBackLink({ text: "Back", href: backUrl }) }}
